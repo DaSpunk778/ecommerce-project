@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👑 King's Stores </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html">👑 King's Stores</a>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <span class="user-name" id="userName" style="display: none;"></span>
+                <a href="cart.html" class="cart-link" id="cartLink" style="display: none;">
+                    🛒 Cart <span class="cart-badge" id="cartBadge">0</span>
+                </a>
+                <button class="btn-logout" id="logoutBtn" style="display: none;">Logout</button>
+                <a href="login.html" class="btn-link" id="loginLink">Login</a>
+                <a href="signin.html" class="btn-primary" id="signupLink">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to <span class="brand-name"> King's Stores</span></h1>
+            <p>Discover amazing products at great prices</p>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search for products..." class="search-input">
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Filter -->
+    <section class="container">
+        <div class="category-filter" id="categoryFilter">
+            <!-- Categories will be added dynamically -->
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be added dynamically -->
+        </div>
+
+        <div class="no-results" id="noResults" style="display: none;">
+            <p>No products found matching your criteria.</p>
+        </div>
+    </section>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Initialize homepage
+        document.addEventListener('DOMContentLoaded', function() {
+            updateNavbar();
+            renderCategories();
+            renderProducts();
+            
+            // Search functionality
+            document.getElementById('searchInput').addEventListener('input', function(e) {
+                searchTerm = e.target.value.toLowerCase();
+                renderProducts();
+            });
+        });
+    </script>
+</body>
+</html>

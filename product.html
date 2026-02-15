@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - ShopHub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html">👑 King's Stores</a>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <span class="user-name" id="userName" style="display: none;"></span>
+                <a href="cart.html" class="cart-link" id="cartLink" style="display: none;">
+                    🛒 Cart <span class="cart-badge" id="cartBadge">0</span>
+                </a>
+                <button class="btn-logout" id="logoutBtn" style="display: none;">Logout</button>
+                <a href="login.html" class="btn-link" id="loginLink">Login</a>
+                <a href="signin.html" class="btn-primary" id="signupLink">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Products</a>
+
+        <div class="product-detail" id="productDetail">
+            <!-- Product details will be loaded here -->
+        </div>
+
+        <div class="related-products">
+            <h2>Related Products</h2>
+            <div class="products-grid" id="relatedProducts">
+                <!-- Related products will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+    <script>
+        let quantity = 1;
+        let currentProduct = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateNavbar();
+            loadProduct();
+        });
+
+        function loadProduct() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = parseInt(urlParams.get('id'));
+            
+            currentProduct = products.find(p => p.id === productId);
+            
+            if (!currentProduct) {
+                document.getElementById('productDetail').innerHTML = `
+                    <div class="not-found">
+                        <h2>Product Not Found</h2>
+                        <a href="index.html" class="btn-primary">Return to Homepage</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Render product details
+            const stars = '⭐'.repeat(Math.floor(currentProduct.rating)) + '☆'.repeat(5 - Math.floor(currentProduct.rating));
+            
+            document.getElementById('productDetail').innerHTML = `
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="${currentProduct.image}" alt="${currentProduct.name}" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">${currentProduct.category}</span>
+                        <h1 class="product-title">${currentProduct.name}</h1>
+                        <div class="product-rating">
+                            <span class="stars">${stars}</span>
+                            <span>${currentProduct.rating} out of 5</span>
+                        </div>
+                        <div class="product-price">$${currentProduct.price.toFixed(2)}</div>
+                        <p class="product-description">${currentProduct.description}</p>
+                        <div class="product-stock">
+                            📦 ${currentProduct.stock} items in stock
+                        </div>
+                        <div class="quantity-selector">
+                            <label>Quantity</label>
+                            <div class="quantity-controls">
+                                <button class="qty-btn" onclick="decreaseQuantity()">-</button>
+                                <span class="quantity-display" id="quantityDisplay">1</span>
+                                <button class="qty-btn" onclick="increaseQuantity()">+</button>
+                            </div>
+                        </div>
+                        <button class="btn-add-to-cart" onclick="addToCartFromProduct()">
+                            🛒 Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Load related products
+            const relatedProductsList = products.filter(p => 
+                p.category === currentProduct.category && p.id !== currentProduct.id
+            ).slice(0, 4);
+            
+            const relatedProductsHTML = relatedProductsList.map(product => `
+                <div class="product-card-small">
+                    <a href="product.html?id=${product.id}">
+                        <img src="${product.image}" alt="${product.name}">
+                    </a>
+                    <div class="product-card-body">
+                        <a href="product.html?id=${product.id}">
+                            <h3>${product.name}</h3>
+                        </a>
+                        <p class="price">$${product.price.toFixed(2)}</p>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('relatedProducts').innerHTML = relatedProductsHTML;
+        }
+
+        function increaseQuantity() {
+            if (quantity < currentProduct.stock) {
+                quantity++;
+                document.getElementById('quantityDisplay').textContent = quantity;
+            }
+        }
+
+        function decreaseQuantity() {
+            if (quantity > 1) {
+                quantity--;
+                document.getElementById('quantityDisplay').textContent = quantity;
+            }
+        }
+
+        function addToCartFromProduct() {
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            if (!user) {
+                alert('Please login to add items to cart');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const existingItem = cart.find(item => item.id === currentProduct.id);
+            
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({
+                    id: currentProduct.id,
+                    name: currentProduct.name,
+                    price: currentProduct.price,
+                    image: currentProduct.image,
+                    quantity: quantity
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`Added ${quantity} ${currentProduct.name}(s) to cart!`);
+            updateNavbar();
+            quantity = 1;
+            document.getElementById('quantityDisplay').textContent = quantity;
+        }
+    </script>
+</body>
+</html>

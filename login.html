@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ShopHub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="auth-container auth-container-purple">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-icon auth-icon-purple">🔐</div>
+                <h2>Welcome Back</h2>
+                <p>Login to your account</p>
+            </div>
+
+            <form id="loginForm" class="auth-form">
+                <div class="error-message" id="errorMessage" style="display: none;"></div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="you@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn-submit btn-submit-purple" id="submitBtn">Login</button>
+            </form>
+
+            <p class="auth-footer">
+                Don't have an account? 
+                <a href="signin.html">Sign up here</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            
+            errorMessage.style.display = 'none';
+            
+            if (!email || !password) {
+                errorMessage.textContent = 'Please fill in all fields';
+                errorMessage.style.display = 'block';
+                return;
+            }
+            
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                localStorage.setItem('currentUser', JSON.stringify({ email: user.email, name: user.name }));
+                window.location.href = 'index.html';
+            } else {
+                errorMessage.textContent = 'Invalid email or password. Please try again.';
+                errorMessage.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
