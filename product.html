@@ -82,7 +82,7 @@
                             <span class="stars">${stars}</span>
                             <span>${currentProduct.rating} out of 5</span>
                         </div>
-                        <div class="product-price">$${currentProduct.price.toFixed(2)}</div>
+                        <div class="product-price">₦${currentProduct.price.toFixed(2)}</div>
                         <p class="product-description">${currentProduct.description}</p>
                         <div class="product-stock">
                             📦 ${currentProduct.stock} items in stock
@@ -116,7 +116,7 @@
                         <a href="product.html?id=${product.id}">
                             <h3>${product.name}</h3>
                         </a>
-                        <p class="price">$${product.price.toFixed(2)}</p>
+                        <p class="price">₦${product.price.toFixed(2)}</p>
                     </div>
                 </div>
             `).join('');
@@ -170,3 +170,4 @@
     </script>
 </body>
 </html>
+
