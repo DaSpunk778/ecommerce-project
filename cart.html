@@ -95,7 +95,7 @@
                     <img src="${item.image}" alt="${item.name}" class="cart-item-image">
                     <div class="cart-item-details">
                         <h3>${item.name}</h3>
-                        <p class="cart-item-price">$${item.price.toFixed(2)}</p>
+                        <p class="cart-item-price">₦${item.price.toFixed(2)}</p>
                     </div>
                     <div class="cart-item-actions">
                         <div class="quantity-controls">
@@ -114,7 +114,7 @@
             const orderItemsHTML = cart.map(item => `
                 <div class="order-item">
                     <span>${item.name} × ${item.quantity}</span>
-                    <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                    <span>₦${(item.price * item.quantity).toFixed(2)}</span>
                 </div>
             `).join('');
             
@@ -125,9 +125,9 @@
             const tax = subtotal * 0.1;
             const total = subtotal + tax;
             
-            document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
-            document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
-            document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+            document.getElementById('subtotal').textContent = `₦${subtotal.toFixed(2)}`;
+            document.getElementById('tax').textContent = `₦${tax.toFixed(2)}`;
+            document.getElementById('total').textContent = `₦${total.toFixed(2)}`;
         }
 
         function updateQuantity(productId, newQuantity) {
@@ -171,3 +171,4 @@
     </script>
 </body>
 </html>
+
