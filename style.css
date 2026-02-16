@@ -863,3 +863,140 @@ a {
         font-size: 0.875rem;
     }
 }
+
+
+
+/* ========================= */
+/* MOBILE NAVBAR FIX */
+/* ========================= */
+@media (max-width: 768px) {
+
+    .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+}
+
+
+/* ========================= */
+/* HERO SECTION FIX */
+/* ========================= */
+@media (max-width: 768px) {
+
+    .hero {
+        padding: 3rem 1rem;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+}
+
+
+/* ========================= */
+/* PRODUCTS GRID FIX */
+/* ========================= */
+
+/* Tablet */
+@media (max-width: 1024px) {
+
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* ========================= */
+/* PRODUCT DETAIL FIX */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+    .product-detail .product-card {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+}
+
+
+/* ========================= */
+/* CART FIX */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+    .cart-item {
+        padding: 1rem;
+    }
+
+    .cart-summary {
+        position: relative;
+        top: 0;
+    }
+
+}
+
+
+/* ========================= */
+/* GENERAL CONTAINER FIX */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+    .container {
+        padding: 1rem;
+    }
+
+}
+
+
+/* ========================= */
+/* BUTTON FIX */
+/* ========================= */
+
+@media (max-width: 600px) {
+
+    .btn-add,
+    .btn-add-to-cart,
+    .btn-checkout,
+    .btn-clear {
+        width: 100%;
+        justify-content: center;
+    }
+
+}
+
+
+/* ========================= */
+/* IMAGE SAFETY FIX */
+/* ========================= */
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
