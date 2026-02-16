@@ -103,7 +103,7 @@ function renderProducts() {
                             <span class="rating-text">${product.rating} (${product.stock} in stock)</span>
                         </div>
                         <div class="product-footer">
-                            <span class="price">$${product.price.toFixed(2)}</span>
+                            <span class="price">₦${product.price.toFixed(2)}</span>
                             <button class="btn-add" onclick="addToCart(${product.id})">
                                 🛒 Add
                             </button>
@@ -144,3 +144,4 @@ function addToCart(productId) {
     alert('Added to cart!');
     updateNavbar();
 }
+
