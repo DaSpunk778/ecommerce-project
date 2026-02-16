@@ -3,7 +3,7 @@ const products = [
   {
     id: 1,
     name: 'Wireless Headphones',
-    price: 15,900.99,
+    price: 15900.99,
     image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80',
     description: 'Premium wireless headphones with noise cancellation and superior sound quality. Perfect for music lovers and professionals.',
     category: 'Electronics',
@@ -13,7 +13,7 @@ const products = [
   {
     id: 2,
     name: 'Smart Watch',
-    price: 30,099.99,
+    price: 30099.99,
     image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80',
     description: 'Track your fitness goals and stay connected with this feature-rich smartwatch. Water resistant and long battery life.',
     category: 'Electronics',
@@ -121,4 +121,5 @@ const products = [
     stock: 28,
   },
 ];
+
 
